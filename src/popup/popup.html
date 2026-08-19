@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Reminder</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-wrapper">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <img src="../../assets/icons/icon48.png" alt="Icon" class="brand-logo">
+        <div class="brand-info">
+          <span class="brand-title">Event Reminder</span>
+          <span class="brand-sub">Nhắc nhở sự kiện & lịch trình</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="btn-open-options" class="icon-btn" title="Cài đặt hệ thống" aria-label="Cài đặt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Next Upcoming Event Banner (Double Bezel) -->
+    <section class="next-reminder-shell" id="next-reminder-container">
+      <div class="next-reminder-core">
+        <div class="next-badge-row">
+          <span class="eyebrow-badge">
+            <span class="pulse-indicator"></span> SỰ KIỆN TIẾP THEO
+          </span>
+          <span class="countdown-tag" id="next-countdown">--:--</span>
+        </div>
+        <div class="next-details">
+          <h2 class="next-title" id="next-title">Chưa có lời nhắc sắp tới</h2>
+          <p class="next-meta" id="next-meta">Tạo lời nhắc để không bỏ lỡ sự kiện quan trọng</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation & Action Bar -->
+    <section class="action-bar">
+      <div class="filter-tabs">
+        <button type="button" class="tab-btn active" data-filter="all">Tất cả (<span id="count-all">0</span>)</button>
+        <button type="button" class="tab-btn" data-filter="today">Hôm nay (<span id="count-today">0</span>)</button>
+        <button type="button" class="tab-btn" data-filter="active">Đang bật (<span id="count-active">0</span>)</button>
+      </div>
+      <button type="button" id="btn-show-add" class="add-event-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>Thêm</span>
+      </button>
+    </section>
+
+    <!-- Reminder List Container -->
+    <main class="reminders-list" id="reminders-list">
+      <!-- Injected dynamically by popup.js -->
+    </main>
+
+    <!-- Empty State Template -->
+    <div class="empty-state" id="empty-state" style="display: none;">
+      <div class="empty-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+      </div>
+      <h3 class="empty-title">Chưa có sự kiện nào</h3>
+      <p class="empty-desc">Chọn nhanh một mẫu sự kiện gợi ý hoặc nhấn nút Thêm:</p>
+      <div class="quick-presets">
+        <button type="button" class="preset-chip" data-title="Uống một cốc nước 💧" data-type="interval" data-interval="45">
+          💧 Uống nước (mỗi 45p)
+        </button>
+        <button type="button" class="preset-chip" data-title="Đứng dậy vươn vai & thư giãn mắt 🧘" data-type="interval" data-interval="60">
+          🧘 Vươn vai (mỗi 60p)
+        </button>
+        <button type="button" class="preset-chip" data-title="Nghỉ trưa & Ăn cơm 🍱" data-type="daily" data-time="12:00">
+          🍱 Ăn trưa (12:00)
+        </button>
+        <button type="button" class="preset-chip" data-title="Bắt đầu ngày làm việc 🚀" data-type="daily" data-time="08:30">
+          🚀 Bắt đầu làm (08:30)
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal Form for Create / Edit Reminder -->
+    <div class="modal-overlay" id="reminder-modal" style="display: none;">
+      <div class="modal-card-shell">
+        <div class="modal-card-core">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-heading">Tạo Lời Nhắc Mới</h3>
+            <button type="button" id="btn-close-modal" class="modal-close-btn" aria-label="Đóng">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+
+          <form id="reminder-form" class="modal-form">
+            <input type="hidden" id="form-reminder-id">
+
+            <!-- Title -->
+            <div class="form-group">
+              <label for="form-title" class="form-label">Tên sự kiện / Lời nhắc <span class="req">*</span></label>
+              <input type="text" id="form-title" class="form-input" placeholder="Ví dụ: Bắt đầu học, Họp nhóm, Uống nước..." required maxlength="100">
+            </div>
+
+            <!-- Message / Notes -->
+            <div class="form-group">
+              <label for="form-message" class="form-label">Ghi chú / Lời dặn (Tùy chọn)</label>
+              <input type="text" id="form-message" class="form-input" placeholder="Nội dung chi tiết khi thông báo xuất hiện..." maxlength="300">
+            </div>
+
+            <!-- Schedule Type Tabs -->
+            <div class="form-group">
+              <label class="form-label">Kiểu lặp lại</label>
+              <div class="schedule-type-grid">
+                <label class="schedule-radio-label">
+                  <input type="radio" name="schedule_type" value="daily" checked>
+                  <span>Hàng ngày</span>
+                </label>
+                <label class="schedule-radio-label">
+                  <input type="radio" name="schedule_type" value="weekly">
+                  <span>Theo thứ</span>
+                </label>
+                <label class="schedule-radio-label">
+                  <input type="radio" name="schedule_type" value="interval">
+                  <span>Định kỳ</span>
+                </label>
+                <label class="schedule-radio-label">
+                  <input type="radio" name="schedule_type" value="one_time">
+                  <span>Một lần</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Date picker (One-time only) -->
+            <div class="form-group" id="field-date-wrap" style="display: none;">
+              <label for="form-date" class="form-label">Ngày diễn ra</label>
+              <input type="date" id="form-date" class="form-input">
+            </div>
+
+            <!-- Time picker (Daily, Weekly, One-time) -->
+            <div class="form-group" id="field-time-wrap">
+              <label for="form-time" class="form-label">Giờ thông báo</label>
+              <input type="time" id="form-time" class="form-input" value="08:00">
+            </div>
+
+            <!-- Weekday Selector (Weekly only) -->
+            <div class="form-group" id="field-days-wrap" style="display: none;">
+              <label class="form-label">Các ngày trong tuần</label>
+              <div class="weekday-pills">
+                <button type="button" class="day-pill active" data-day="1">T2</button>
+                <button type="button" class="day-pill active" data-day="2">T3</button>
+                <button type="button" class="day-pill active" data-day="3">T4</button>
+                <button type="button" class="day-pill active" data-day="4">T5</button>
+                <button type="button" class="day-pill active" data-day="5">T6</button>
+                <button type="button" class="day-pill" data-day="6">T7</button>
+                <button type="button" class="day-pill" data-day="0">CN</button>
+              </div>
+            </div>
+
+            <!-- Interval duration (Interval only) -->
+            <div class="form-group" id="field-interval-wrap" style="display: none;">
+              <label for="form-interval" class="form-label">Nhắc lại mỗi (phút)</label>
+              <div class="interval-input-wrap">
+                <input type="number" id="form-interval" class="form-input" min="1" max="1440" value="45">
+                <div class="interval-quick-buttons">
+                  <button type="button" class="btn-micro" data-val="15">15p</button>
+                  <button type="button" class="btn-micro" data-val="30">30p</button>
+                  <button type="button" class="btn-micro" data-val="45">45p</button>
+                  <button type="button" class="btn-micro" data-val="60">60p</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sound selection -->
+            <div class="form-row-split">
+              <div class="form-group flex-1">
+                <label for="form-sound" class="form-label">Âm thanh chuông</label>
+                <div class="sound-field-wrap">
+                  <select id="form-sound" class="form-select">
+                    <option value="default">Chuông tiêu chuẩn</option>
+                    <option value="soft">Nhẹ nhàng</option>
+                    <option value="bell">Chuông ngân</option>
+                    <option value="none">Tắt chuông</option>
+                  </select>
+                  <button type="button" id="btn-popup-test-sound" class="btn-sound-preview" title="Nghe thử">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="form-error-msg" class="form-error" style="display: none;"></div>
+
+            <!-- Form Actions -->
+            <div class="modal-footer">
+              <button type="button" id="btn-cancel-form" class="btn-modal-cancel">Hủy</button>
+              <button type="submit" id="btn-save-form" class="btn-modal-save">
+                <span>Lưu lời nhắc</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

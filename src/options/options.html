@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cài Đặt - Event Reminder</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="options-container">
+    <!-- Header -->
+    <header class="options-header">
+      <div class="brand">
+        <img src="../../assets/icons/icon48.png" alt="Logo" class="brand-icon">
+        <div>
+          <h1 class="brand-title">Event Reminder</h1>
+          <p class="brand-subtitle">Cài đặt & Tùy biến hệ thống nhắc nhở sự kiện</p>
+        </div>
+      </div>
+      <div class="status-badge" id="global-status-badge">
+        <span class="pulse-dot"></span>
+        <span id="global-status-text">Đang hoạt động</span>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="options-grid">
+      <!-- Section 1: Cài đặt chung -->
+      <section class="card-shell">
+        <div class="card-core">
+          <div class="card-header">
+            <div class="card-icon-wrap icon-general">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </div>
+            <div>
+              <h2 class="card-title">Hệ Thống Lời Nhắc</h2>
+              <p class="card-desc">Bật hoặc tắt toàn bộ lời nhắc sự kiện trên trình duyệt</p>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label for="setting-enabled" class="setting-label">Kích hoạt thông báo nhắc nhở</label>
+              <span class="setting-hint">Tự động báo chuông và hiển thị thông báo khi đến giờ sự kiện</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-enabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Thông báo Desktop -->
+      <section class="card-shell">
+        <div class="card-core">
+          <div class="card-header">
+            <div class="card-icon-wrap icon-notif">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            </div>
+            <div>
+              <h2 class="card-title">Thông Báo Màn Hình (Desktop Notification)</h2>
+              <p class="card-desc">Cấu hình cách thông báo hiển thị trên màn hình hệ thống</p>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label for="notif-enabled" class="setting-label">Hiển thị thông báo màn hình</label>
+              <span class="setting-hint">Hiện banner thông báo nổi kèm các nút tương tác nhanh</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="notif-enabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label for="notif-priority" class="setting-label">Mức độ ưu tiên thông báo</label>
+              <span class="setting-hint">Mức cao sẽ giữ thông báo cố định trên màn hình đến khi bạn xử lý</span>
+            </div>
+            <select id="notif-priority" class="select-input">
+              <option value="low">Thấp (Tự tắt nhanh)</option>
+              <option value="normal">Tiêu chuẩn (Bình thường)</option>
+              <option value="high">Ưu tiên cao (Giữ trên màn hình)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Cài đặt Âm thanh -->
+      <section class="card-shell">
+        <div class="card-core">
+          <div class="card-header">
+            <div class="card-icon-wrap icon-audio">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            </div>
+            <div>
+              <h2 class="card-title">Âm Thanh Chuông Báo</h2>
+              <p class="card-desc">Tùy chọn kiểu chuông và mức âm lượng khi nhắc nhở</p>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label for="audio-enabled" class="setting-label">Phát âm thanh</label>
+              <span class="setting-hint">Bật chuông âm thanh kèm theo thông báo</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="audio-enabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label for="audio-default-sound" class="setting-label">Kiểu chuông mặc định</label>
+              <span class="setting-hint">Âm thanh áp dụng cho các lời nhắc không đặt chuông riêng</span>
+            </div>
+            <div class="sound-select-wrap">
+              <select id="audio-default-sound" class="select-input">
+                <option value="default">Chuông tiêu chuẩn (Ấm áp)</option>
+                <option value="soft">Chuông nhẹ nhàng (Thư thái)</option>
+                <option value="bell">Chuông ngân vang (Rõ ràng)</option>
+                <option value="none">Không phát âm thanh</option>
+              </select>
+              <button type="button" id="btn-test-sound" class="btn-secondary" title="Nghe thử âm thanh">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Nghe thử
+              </button>
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label for="audio-volume" class="setting-label">Âm lượng chuông báo (<span id="volume-val">80%</span>)</label>
+              <span class="setting-hint">Điều chỉnh độ lớn của chuông báo nhắc việc</span>
+            </div>
+            <input type="range" id="audio-volume" min="0" max="1" step="0.05" value="0.8" class="range-slider">
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Quản lý & Dữ liệu nâng cao -->
+      <section class="card-shell">
+        <div class="card-core">
+          <div class="card-header">
+            <div class="card-icon-wrap icon-advanced">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            </div>
+            <div>
+              <h2 class="card-title">Sao Lưu & Dữ Liệu</h2>
+              <p class="card-desc">Xuất, nhập và quản lý an toàn toàn bộ dữ liệu sự kiện đã tạo</p>
+            </div>
+          </div>
+
+          <div class="actions-grid">
+            <button type="button" id="btn-export-data" class="action-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <div>
+                <strong>Xuất dữ liệu (Export JSON)</strong>
+                <span>Tải về file sao lưu các lời nhắc và cấu hình</span>
+              </div>
+            </button>
+
+            <label for="file-import-data" class="action-btn cursor-pointer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <div>
+                <strong>Nhập dữ liệu (Import JSON)</strong>
+                <span>Khôi phục lời nhắc từ file sao lưu</span>
+              </div>
+              <input type="file" id="file-import-data" accept=".json" style="display: none;">
+            </label>
+
+            <button type="button" id="btn-sync-alarms" class="action-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <div>
+                <strong>Đồng bộ Alarms</strong>
+                <span>Kiểm tra và tái lập lịch nhắc nhở trong Chrome</span>
+              </div>
+            </button>
+
+            <button type="button" id="btn-reset-data" class="action-btn danger-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              <div>
+                <strong>Xóa & Đặt lại tất cả</strong>
+                <span>Xóa toàn bộ lời nhắc và đưa cài đặt về mặc định</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Save Bar -->
+    <footer class="options-footer">
+      <span id="toast-message" class="toast-message"></span>
+      <div class="footer-buttons">
+        <button type="button" id="btn-save-settings" class="btn-primary">
+          <span class="btn-text">Lưu cài đặt</span>
+          <div class="btn-icon-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="options.js" type="module"></script>
+</body>
+</html>

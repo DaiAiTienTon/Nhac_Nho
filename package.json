@@ -1,0 +1,19 @@
+{
+  "name": "event-reminder-extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension nhắc nhở sự kiện, lịch trình và công việc cá nhân đúng giờ (Manifest V3)",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-tests.js",
+    "generate-assets": "node scripts/generate-assets.js"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "reminder",
+    "event-reminder",
+    "scheduler"
+  ],
+  "author": "",
+  "license": "MIT"
+}

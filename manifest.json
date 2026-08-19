@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Event Reminder - Nhắc Nhở Sự Kiện",
+  "version": "1.0.0",
+  "description": "Chrome Extension nhắc nhở sự kiện, lịch trình và công việc cá nhân đúng giờ, local-first và bảo mật.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "offscreen"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Event Reminder",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  }
+}
